@@ -3,7 +3,7 @@
 <br>
 <h2>Add new product</h2>
 <br>
-<form action="http://localhost:8080/api/products/v1" method="post">
+<form id="loadForm" action="http://localhost:8080/api/products/v1" method="post">
     <label for="title">Title:</label>
     <input type="text" id="title" name="title">
     <label for="description">Description:</label>
@@ -18,12 +18,12 @@
     <input type="number" id="stock" name="stock">
     <label for="category">Category:</label>
     <input type="text" id="category" name="category">
-    <input type="submit" value="Submit">
+    <input id="loadFormSubmitButton" type="submit" value="Submit">
 </form>
 <br>
 <h2>Products on storage </h2>
 <br>
-<table>
+<table id="product-table">
     <thead>
         <tr>
             {{#each productsHeader}}
@@ -35,9 +35,12 @@
         {{#each productsData}}
             <tr>
                 {{#each this}}
-                    <td>{{this}}</td>
+                    <td>{{completeNullable this}}</td>
                 {{/each}}
             </tr>
         {{/each}}
     </tbody>
 </table>
+<p id="empty-state" style="display: none;">No products on storage.</p>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/realtimeProductsWithWebsockets.js"></script>
